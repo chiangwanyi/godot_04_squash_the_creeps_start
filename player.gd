@@ -30,7 +30,7 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		$Pivot.look_at(position + direction, Vector3.UP)
 		if is_on_floor():
-			$AnimationPlayer.speed_scale = 4
+			$AnimationPlayer.speed_scale = 3
 		else:
 			$AnimationPlayer.speed_scale = 1
 	else:
