@@ -90,6 +90,7 @@ directional_shadow_max_distance = 40.0
 environment = SubResource("Environment_dua8a")
 
 [node name="Player" parent="." instance=ExtResource("1_6powh")]
+transform = Transform3D(0.971949, -0.0299499, -0.233278, 0, 0.991859, -0.127342, 0.235193, 0.12377, 0.964036, 0, 0.0693367, 0)
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.184, 0, 0)
@@ -123,7 +124,7 @@ mesh = SubResource("CylinderMesh_7vkp8")
 curve = SubResource("Curve3D_d44lv")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(0.0063881, 0, -0.99998, 0, 1, 0, 0.99998, 0, 0.0063881, -12.6957, 0, -24.8211)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 1, -15)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
