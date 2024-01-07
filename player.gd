@@ -29,6 +29,12 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.look_at(position + direction, Vector3.UP)
+		if is_on_floor():
+			$AnimationPlayer.speed_scale = 4
+		else:
+			$AnimationPlayer.speed_scale = 1
+	else:
+		$AnimationPlayer.speed_scale = 1
 
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
@@ -65,7 +71,8 @@ func _physics_process(delta):
 				target_velocity.y = bounce_impulse
 				# Prevent further duplicate calls.
 				break
-				
+	
+	$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
 
 func die():
 	hit.emit()
