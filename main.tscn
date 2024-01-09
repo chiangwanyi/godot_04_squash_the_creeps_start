@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://2xuu6ubaadli"]
 
-[ext_resource type="PackedScene" uid="uid://cxkptibjc60vk" path="res://player.tscn" id="1_6powh"]
+[ext_resource type="PackedScene" uid="uid://cxkptibjc60vk" path="res://player/player.tscn" id="1_6powh"]
 [ext_resource type="Script" path="res://main.gd" id="1_mjug6"]
-[ext_resource type="PackedScene" uid="uid://cb5rqt3eduflw" path="res://mob.tscn" id="2_owmgx"]
+[ext_resource type="PackedScene" uid="uid://5kfo3rjpt7ws" path="res://mob/mob.tscn" id="2_7xm8h"]
 [ext_resource type="FontFile" uid="uid://c38ixr3lii43l" path="res://fonts/Montserrat-Medium.ttf" id="4_0e3sl"]
 [ext_resource type="Script" path="res://ScoreLabel.gd" id="5_jrs7b"]
 
@@ -44,7 +44,7 @@ default_font_size = 22
 
 [node name="Main" type="Node"]
 script = ExtResource("1_mjug6")
-mob_scene = ExtResource("2_owmgx")
+mob_scene = ExtResource("2_7xm8h")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
