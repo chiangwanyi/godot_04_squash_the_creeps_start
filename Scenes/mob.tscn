@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://5kfo3rjpt7ws"]
+[gd_scene load_steps=6 format=3 uid="uid://diu6rhtf10hgo"]
 
-[ext_resource type="Script" path="res://mob/mob.gd" id="1_8pr7p"]
-[ext_resource type="PackedScene" uid="uid://dg3ywa8s2dsk6" path="res://art/mob.glb" id="2_4iagh"]
+[ext_resource type="Script" path="res://Scripts/mob.gd" id="1_g5yp1"]
+[ext_resource type="PackedScene" uid="uid://dg3ywa8s2dsk6" path="res://Assets/art/mob.glb" id="2_4iagh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pv3sx"]
 size = Vector3(1.62907, 1.11832, 2.93562)
@@ -42,7 +42,7 @@ _data = {
 [node name="Mob" type="CharacterBody3D" groups=["mob"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_8pr7p")
+script = ExtResource("1_g5yp1")
 
 [node name="Pivot" type="Node3D" parent="."]
 

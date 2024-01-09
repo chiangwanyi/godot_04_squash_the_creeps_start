@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://2xuu6ubaadli"]
 
-[ext_resource type="PackedScene" uid="uid://cxkptibjc60vk" path="res://player/player.tscn" id="1_6powh"]
-[ext_resource type="Script" path="res://main.gd" id="1_mjug6"]
-[ext_resource type="PackedScene" uid="uid://5kfo3rjpt7ws" path="res://mob/mob.tscn" id="2_7xm8h"]
-[ext_resource type="FontFile" uid="uid://c38ixr3lii43l" path="res://fonts/Montserrat-Medium.ttf" id="4_0e3sl"]
-[ext_resource type="Script" path="res://ScoreLabel.gd" id="5_jrs7b"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_1jemj"]
+[ext_resource type="PackedScene" uid="uid://dggfkp2k5cu6d" path="res://Scenes/player.tscn" id="1_6powh"]
+[ext_resource type="PackedScene" uid="uid://diu6rhtf10hgo" path="res://Scenes/mob.tscn" id="2_36ym1"]
+[ext_resource type="FontFile" uid="uid://c38ixr3lii43l" path="res://Assets/fonts/Montserrat-Medium.ttf" id="4_xigas"]
+[ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="5_ig4ij"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qvhck"]
 size = Vector3(60, 2, 60)
@@ -39,12 +39,12 @@ _data = {
 point_count = 5
 
 [sub_resource type="Theme" id="Theme_arnnp"]
-default_font = ExtResource("4_0e3sl")
+default_font = ExtResource("4_xigas")
 default_font_size = 22
 
 [node name="Main" type="Node"]
-script = ExtResource("1_mjug6")
-mob_scene = ExtResource("2_7xm8h")
+script = ExtResource("1_1jemj")
+mob_scene = ExtResource("2_36ym1")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -147,7 +147,7 @@ offset_right = 108.0
 offset_bottom = 51.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
-script = ExtResource("5_jrs7b")
+script = ExtResource("5_ig4ij")
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
 layout_mode = 1

@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxkptibjc60vk"]
+[gd_scene load_steps=8 format=3 uid="uid://dggfkp2k5cu6d"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_k2buf"]
-[ext_resource type="PackedScene" uid="uid://cj8265fpq712t" path="res://art/player.glb" id="1_yfp58"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jscoi"]
+[ext_resource type="PackedScene" uid="uid://cj8265fpq712t" path="res://Assets/art/player.glb" id="1_yfp58"]
 [ext_resource type="Animation" uid="uid://c5neiigbrbald" path="res://float.res" id="3_awjds"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ox18v"]
@@ -46,7 +46,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 6
-script = ExtResource("1_k2buf")
+script = ExtResource("1_jscoi")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
