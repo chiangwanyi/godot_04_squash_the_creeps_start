@@ -5,7 +5,7 @@ class_name IState extends Node
 signal finished(next_state_name)
 
 func get_class_name():
-	pass
+	return "istate"
 
 # 状态进入时. E.g. change the animation.
 func enter():

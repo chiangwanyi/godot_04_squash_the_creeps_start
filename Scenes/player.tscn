@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qgy6gb58nskh"]
+[gd_scene load_steps=18 format=3 uid="uid://qgy6gb58nskh"]
 
 [ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_8s0er"]
 [ext_resource type="PackedScene" uid="uid://cj8265fpq712t" path="res://Assets/art/player.glb" id="1_yfp58"]
+[ext_resource type="Script" path="res://Scripts/player/player_state_machine.gd" id="2_dv3ec"]
 [ext_resource type="Animation" uid="uid://c5neiigbrbald" path="res://float.res" id="3_awjds"]
+[ext_resource type="Script" path="res://Scripts/player/state/idle_state.gd" id="3_dw264"]
+[ext_resource type="Script" path="res://Scripts/player/state/moving_state.gd" id="4_wlj5j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ox18v"]
 radius = 0.8
@@ -37,16 +40,77 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mw223"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.8, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cnwmi"]
 _data = {
 "RESET": SubResource("Animation_krho8"),
-"float": ExtResource("3_awjds")
+"idle": SubResource("Animation_mw223"),
+"walk": ExtResource("3_awjds")
 }
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_gtaur"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0oik5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_41l3x"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j5ot2"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84prk"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nqu78"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_gtaur")
+states/Idle/position = Vector2(384.143, 100)
+states/Walk/node = SubResource("AnimationNodeBlendSpace2D_0oik5")
+states/Walk/position = Vector2(591.143, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_41l3x"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_j5ot2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_84prk")]
+graph_offset = Vector2(-57.8572, 0)
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 6
 script = ExtResource("1_8s0er")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_dv3ec")
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_dw264")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("4_wlj5j")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -67,9 +131,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15433, 0)
 shape = SubResource("CylinderShape3D_d0rms")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_cnwmi")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_nqu78")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/is_idle = false
+parameters/conditions/is_moving = false
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(0, 0)
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

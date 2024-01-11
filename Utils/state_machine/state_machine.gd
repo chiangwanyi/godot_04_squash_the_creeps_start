@@ -70,8 +70,8 @@ func _on_animation_finished(anim_name):
 	current_state._on_animation_finished(anim_name)
 
 
-func _change_state(state_name):
-	# Logger.info(self, "状态切换 {} -> {}", [current_state.get_class_name(), state_name])
+func _change_state(state_name: String):
+	print("状态切换：", current_state.get_class_name(), " -> ", state_name)
 	if not _active:
 		return
 	current_state.exit()

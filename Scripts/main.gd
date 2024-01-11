@@ -6,6 +6,7 @@ func _ready():
 	$UserInterface/Retry.hide()
 
 func _on_mob_timer_timeout():
+	return
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
